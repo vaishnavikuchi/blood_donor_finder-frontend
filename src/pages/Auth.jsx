@@ -63,7 +63,7 @@ export const Auth = () => {
       success('Logged in successfully!');
       navigate(redirectPath, { replace: true });
     } catch (err) {
-      const msg = err.response?.data?.message || 'Invalid email or password.';
+      const msg = err.response?.data?.message || (err.message && err.message.includes('Network') ? 'Unable to reach backend server. Please check connection.' : 'Invalid email or password.');
       setErrorMessage(msg);
       error(msg);
     } finally {
